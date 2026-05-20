@@ -36,8 +36,7 @@ export default async function SaveTheDatePage({
           draggable={false}
         />
         <div className="absolute inset-0 overflow-auto flex flex-col justify-between text-shadow-2xs items-center bg-gradient-to-t from-black/80 to-transparent px-7 py-10">
-
-          <div>
+          <div className="mb-10">
             <h2 className="font-cormorant text-2xl font-thin text-center text-white/80 mb-3">Angela Uribe & Alberto Cardona</h2>
             <h1 className="text-7xl font-pinyon text-white text-center">Save the date</h1>
           </div>
