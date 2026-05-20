@@ -1,0 +1,127 @@
+.stage {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #0a0806;
+}
+
+.stageBg {
+  position: absolute;
+  inset: -40px;
+  z-index: 0;
+}
+
+.stageBgImg {
+  object-fit: cover;
+  object-position: 50% 30%;
+  filter: blur(48px) brightness(0.22) saturate(1.4);
+  transform: scale(1.08);
+}
+
+.card {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.7);
+}
+
+@media (min-width: 720px) {
+  .card {
+    width: min(460px, 92vw);
+    height: min(840px, 92vh);
+    border-radius: 4px;
+    box-shadow:
+      0 60px 100px -30px rgba(0, 0, 0, 0.85),
+      0 0 0 1px rgba(166, 124, 82, 0.15);
+  }
+}
+
+.toastStack {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 9999;
+  pointer-events: none;
+  width: max-content;
+  max-width: calc(100vw - 32px);
+}
+
+.toast {
+  background: #1a1410;
+  color: #f7eee2;
+  border: 1px solid rgba(166, 124, 82, 0.45);
+  padding: 14px 22px 14px 18px;
+  min-width: 280px;
+  box-shadow: 0 18px 40px -10px rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--font-cormorant), serif;
+  pointer-events: auto;
+  animation: toastIn 0.35s ease-out;
+}
+
+.toastOut {
+  animation: toastOut 0.35s ease-in forwards;
+}
+
+.toastMark {
+  width: 28px;
+  height: 28px;
+  border: 1px solid #a67c52;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-family: var(--font-pinyon), cursive;
+  color: #a67c52;
+  font-size: 20px;
+  line-height: 1;
+  padding-bottom: 2px;
+}
+
+.toastMarkDecline {
+  color: #c9b48f;
+}
+
+.toastTitle {
+  font-size: 13px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #f7eee2;
+}
+
+.toastSub {
+  font-size: 13px;
+  font-style: italic;
+  color: rgba(247, 238, 226, 0.7);
+  margin-top: 2px;
+}
+
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes toastOut {
+  to {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
