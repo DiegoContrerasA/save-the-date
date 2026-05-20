@@ -49,17 +49,6 @@ export default function SaveTheDateClient({
   return (
     <div className={fontClassName}>
       <div className={styles.stage}>
-        {/* Ambient blurred background derived from the photo */}
-        <div className={styles.stageBg}>
-          <Image
-            src="/couple.avif"
-            alt=""
-            fill
-            aria-hidden
-            className={styles.stageBgImg}
-          />
-        </div>
-
         <div className={styles.card}>
           {/* Photo */}
           <Image
@@ -95,49 +84,11 @@ export default function SaveTheDateClient({
             }}
           />
 
-          {/* Guest names */}
-          <div
-            style={{
-              position: "absolute",
-              top: 28,
-              left: 0,
-              right: 0,
-              textAlign: "center",
-              color: "rgba(247,241,232,0.92)",
-              textShadow: "0 1px 6px rgba(0,0,0,0.65)",
-            }}
-          >
-            <div
-              style={{
-                fontFamily: "var(--font-cormorant), serif",
-                fontStyle: "italic",
-                fontSize: 12,
-                letterSpacing: "0.28em",
-                textTransform: "uppercase",
-                opacity: 0.72,
-              }}
-            >
-              specially for
-            </div>
-            <div
-              style={{
-                fontFamily: "var(--font-cormorant), serif",
-                fontSize: 15,
-                letterSpacing: "0.22em",
-                textTransform: "uppercase",
-                marginTop: 8,
-                fontWeight: 400,
-              }}
-            >
-              {guestName}
-            </div>
-          </div>
-
           {/* Script headline */}
           <h1
             style={{
               position: "absolute",
-              top: 92,
+              top: 28,
               left: 0,
               right: 0,
               textAlign: "center",
@@ -152,6 +103,31 @@ export default function SaveTheDateClient({
           >
             Save the date
           </h1>
+
+          {/* Guest names */}
+          <div
+            style={{
+              position: "absolute",
+              top: 104,
+              left: 0,
+              right: 0,
+              textAlign: "center",
+              color: "rgba(247,241,232,0.92)",
+              textShadow: "0 1px 6px rgba(0,0,0,0.65)",
+            }}
+          >
+            <div
+              style={{
+                fontFamily: "var(--font-cormorant), serif",
+                fontSize: 16,
+                letterSpacing: "0.22em",
+                textTransform: "uppercase",
+                fontWeight: 600,
+              }}
+            >
+              {guestName}
+            </div>
+          </div>
 
           {/* Bottom block */}
           <div
@@ -205,7 +181,8 @@ export default function SaveTheDateClient({
               style={{
                 marginTop: 14,
                 fontFamily: "var(--font-cormorant), serif",
-                fontSize: 17,
+                fontSize: 20,
+                fontWeight: 600,
                 letterSpacing: "0.32em",
                 textTransform: "uppercase",
                 color: "rgba(251,246,239,0.92)",
@@ -245,63 +222,52 @@ export default function SaveTheDateClient({
               Medellín · Colombia
             </div>
 
-            {/* Confirm button */}
-            <button
-              onClick={onConfirm}
-              style={{
-                marginTop: 22,
-                background: "transparent",
-                color: "#fbf6ef",
-                border: "1px solid rgba(251,246,239,0.85)",
-                padding: "12px 28px",
-                fontFamily: "var(--font-cormorant), serif",
-                fontSize: 13,
-                letterSpacing: "0.32em",
-                textTransform: "uppercase",
-                cursor: "pointer",
-                transition: "all 0.25s ease",
-              }}
-            >
-              Confirm attendance
-            </button>
-
-            {/* Decline link */}
-            <button
-              onClick={onDecline}
-              style={{
-                display: "block",
-                margin: "14px auto 0",
-                background: "transparent",
-                border: "none",
-                padding: 0,
-                color: "rgba(251,246,239,0.78)",
-                fontFamily: "var(--font-cormorant), serif",
-                fontStyle: "italic",
-                fontSize: 14,
-                letterSpacing: "0.06em",
-                textDecoration: "underline",
-                textUnderlineOffset: "4px",
-                textDecorationColor: "rgba(251,246,239,0.45)",
-                textDecorationThickness: "1px",
-                cursor: "pointer",
-              }}
-            >
-              I won&apos;t be able to attend
-            </button>
-
-            {/* Footnote */}
+            {/* Buttons */}
             <div
               style={{
-                marginTop: 16,
-                fontFamily: "var(--font-cormorant), serif",
-                fontStyle: "italic",
-                fontSize: 13,
-                color: "rgba(251,246,239,0.65)",
-                letterSpacing: "0.04em",
+                marginTop: 22,
+                display: "flex",
+                gap: 12,
+                justifyContent: "center",
               }}
             >
-              Formal invitation to follow
+              <button
+                onClick={onConfirm}
+                className={styles.btnConfirm}
+                style={{
+                  border: "1px solid #fbf6ef",
+                  padding: "12px 24px",
+                  fontFamily: "var(--font-cormorant), serif",
+                  fontSize: 13,
+                  letterSpacing: "0.32em",
+                  textTransform: "uppercase",
+                  cursor: "pointer",
+                  transition: "opacity 0.25s ease",
+                }}
+              >
+                Confirm
+              </button>
+
+              <button
+                onClick={onDecline}
+                className={styles.btnDecline}
+                style={{
+                  background: "transparent",
+                  color: "#fbf6ef",
+                  border: "1px solid rgba(251,246,239,0.85)",
+                  padding: "12px 24px",
+                  fontFamily: "var(--font-cormorant), serif",
+                  fontSize: 13,
+                  letterSpacing: "0.32em",
+                  textTransform: "uppercase",
+                  cursor: "pointer",
+                  transition: "all 0.25s ease",
+                }}
+              >
+                Decline
+              </button>
             </div>
+
           </div>
         </div>
       </div>

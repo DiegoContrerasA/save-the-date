@@ -1,7 +1,8 @@
 import { notFound } from "next/navigation";
 import { Cormorant_Garamond, Pinyon_Script } from "next/font/google";
-import { guests } from "../guests";
+
 import SaveTheDateClient from "./SaveTheDateClient";
+import { guests } from "../guests";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],

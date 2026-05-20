@@ -10,6 +10,8 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-cormorant: var(--font-cormorant);
+  --font-pinyon: var(--font-pinyon);
 }
 
 @media (prefers-color-scheme: dark) {

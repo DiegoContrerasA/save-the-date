@@ -5,20 +5,6 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background: #0a0806;
-}
-
-.stageBg {
-  position: absolute;
-  inset: -40px;
-  z-index: 0;
-}
-
-.stageBgImg {
-  object-fit: cover;
-  object-position: 50% 30%;
-  filter: blur(48px) brightness(0.22) saturate(1.4);
-  transform: scale(1.08);
 }
 
 .card {
@@ -106,6 +92,20 @@
   font-style: italic;
   color: rgba(247, 238, 226, 0.7);
   margin-top: 2px;
+}
+
+.btnConfirm {
+  background: #fbf6ef !important;
+  color: #0c0804 !important;
+  border-color: #fbf6ef !important;
+}
+
+.btnConfirm:hover {
+  opacity: 0.75;
+}
+
+.btnDecline:hover {
+  background: rgba(251, 246, 239, 0.2) !important;
 }
 
 @keyframes toastIn {
