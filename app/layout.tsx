@@ -1,7 +1,20 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Cormorant_Garamond, Geist, Geist_Mono, Pinyon_Script } from "next/font/google";
 import Image from "next/image";
 import "./globals.css";
+
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  variable: "--font-cormorant",
+  weight: ["300", "400", "500", "600"],
+  style: ["normal", "italic"],
+});
+
+const pinyon = Pinyon_Script({
+  subsets: ["latin"],
+  variable: "--font-pinyon",
+  weight: "400",
+});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,23 +39,18 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${cormorant.variable} ${pinyon.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
-        {/* Shared blurred background */}
+      <body className="h-dvh flex flex-col">
         <div className="fixed inset-0 bg-[#0a0806]">
           <div className="absolute inset-[-40px]">
             <Image
+              draggable={false}
               src="/couple.avif"
               alt=""
               fill
               aria-hidden
-              style={{
-                objectFit: "cover",
-                objectPosition: "50% 30%",
-                filter: "blur(48px) brightness(0.22) saturate(1.4)",
-                transform: "scale(1.08)",
-              }}
+              className="object-cover object-[50%_30%] blur-[48px] brightness-[0.22] saturate-[1.4] scale-[1.08]"
             />
           </div>
         </div>
