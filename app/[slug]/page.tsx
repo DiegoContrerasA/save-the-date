@@ -50,9 +50,9 @@ export default async function SaveTheDatePage({
 
           <div>
             <div className="font-cormorant justify-center text-7xl tracking-[3px] flex gap-4.5 font-light text-white">
-              <span>01</span>
-              <span className="inline-block w-px h-14 bg-white" />
               <span>08</span>
+              <span className="inline-block w-px h-14 bg-white" />
+              <span>01</span>
               <span className="inline-block w-px h-14 bg-white" />
               <span>2027</span>
             </div>
