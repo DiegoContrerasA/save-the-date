@@ -56,7 +56,7 @@ export default async function SaveTheDatePage({
               <span className="inline-block w-px h-14 bg-white" />
               <span>2027</span>
             </div>
-            <p className="text-center uppercase font-cormorant font-semibold text-3xl mt-4">Diego <span className="font-pinyon">&</span> Andrea</p>
+            <p className="text-center uppercase font-cormorant font-semibold text-3xl mt-4 text-white">Diego <span className="font-pinyon">&</span> Andrea</p>
             <p className="text-center text-white/60 font-cormorant text-xs">Medellín · Colombia</p>
            <div className="mt-10 h-24 flex flex-col items-center justify-center">
              <AttendanceForm id={invitation.id} confirmed={invitation.confirmed} />
