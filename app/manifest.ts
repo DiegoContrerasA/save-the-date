@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "Save the Date · Diego & Andrea",
     short_name: "Diego & Andrea",
-    description: "Nos casamos el 1 de agosto de 2027 en Medellín, Colombia.",
+    description: "Nos casamos el 8 de enero de 2027 en Medellín, Colombia.",
     start_url: "/",
     display: "standalone",
     background_color: "#0a0806",

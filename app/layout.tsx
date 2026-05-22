@@ -28,7 +28,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Save the Date · Diego & Andrea · 08.01.2027",
-  description: "Nos casamos el 1 de agosto de 2027 en Medellín, Colombia. ¡Guarda la fecha!",
+  description: "Nos casamos el 8 de enero de 2027 en Medellín, Colombia. ¡Guarda la fecha!",
   icons: {
     icon: [
       { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
