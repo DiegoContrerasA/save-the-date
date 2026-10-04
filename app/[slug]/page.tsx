@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getGuestBySlug } from "../lib/guests";
+import DressCode from "./components/dress-code";
 import Envelopes from "./components/envelopes";
 import Intro from "./components/intro";
 import Personal from "./components/personal";
@@ -28,6 +29,7 @@ export default async function InvitationPage({
       <PhotoStack />
       <Personal name={guest.name} hasRole={guest.hasRole} />
       <Envelopes />
+      <DressCode />
     </main>
   );
 }
