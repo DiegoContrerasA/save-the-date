@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Geist, Geist_Mono, Pinyon_Script } from "next/font/google";
-import Image from "next/image";
+import { Cormorant_Garamond, Geist, Geist_Mono, Pinyon_Script, Playfair_Display } from "next/font/google";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
@@ -16,6 +15,12 @@ const pinyon = Pinyon_Script({
   weight: "400",
 });
 
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-playfair",
+  weight: ["800", "900"],
+});
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -27,8 +32,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Save the Date · Diego & Andrea · 08.01.2027",
-  description: "Nos casamos el 8 de enero de 2027 en Medellín, Colombia. ¡Guarda la fecha!",
+  title: "Invitación de boda · Diego & Andrea · 08.01.2027",
+  description: "Nos casamos el 8 de enero de 2027 en Medellín, Colombia. ¡Te esperamos!",
+  robots: { index: false, follow: false },
   icons: {
     icon: [
       { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
@@ -45,22 +51,10 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${cormorant.variable} ${pinyon.variable} h-full antialiased`}
+      lang="es"
+      className={`${geistSans.variable} ${geistMono.variable} ${cormorant.variable} ${pinyon.variable} ${playfair.variable} antialiased`}
     >
-      <body className="h-dvh flex flex-col">
-        <div className="fixed inset-0 bg-[#0a0806]">
-          <div className="absolute inset-[-40px]">
-            <Image
-              draggable={false}
-              src="/couple.avif"
-              alt=""
-              fill
-              aria-hidden
-              className="object-cover object-[50%_30%] blur-[48px] brightness-[0.22] saturate-[1.4] scale-[1.08]"
-            />
-          </div>
-        </div>
+      <body className="min-h-dvh bg-black text-white">
         {children}
       </body>
     </html>
