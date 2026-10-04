@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getGuestBySlug } from "../lib/guests";
 import Intro from "./components/intro";
+import PhotoStack from "./components/photo-stack";
 import Venue from "./components/venue";
 
 export const metadata: Metadata = {
@@ -22,6 +23,7 @@ export default async function InvitationPage({
       <Intro name={guest.name} roleMessage={guest.roleMessage} />
 
       <Venue />
+      <PhotoStack />
     </main>
   );
 }
