@@ -17,11 +17,11 @@ export default async function InvitationPage({
   if (!guest) notFound();
 
   return (
-    <main className="relative z-10 w-full">
+    <main className="relative z-10 w-full overflow-x-clip">
       <Intro name={guest.name} roleMessage={guest.roleMessage} />
 
       {/* TEMPORAL: espacio para probar que el scroll continúa tras el pin */}
-      <section className="flex h-dvh items-center justify-center font-cormorant text-white/60">
+      <section className="flex h-screen items-center justify-center font-cormorant text-white/60">
         Siguiente sección…
       </section>
     </main>

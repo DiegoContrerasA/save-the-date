@@ -22,8 +22,22 @@
   }
 }
 
+/* Nunca scroll horizontal: clip (no crea scroll container) en html y body */
+html,
+body {
+  overflow-x: clip;
+  max-width: 100%;
+}
+
 body {
   background: #000;
   color: #fff;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ScrollTrigger redondea el ancho del pin hacia arriba (p. ej. 345.56 -> 346px)
+   y eso genera 1px de scroll horizontal en pantallas con ancho fraccionario. */
+.pin-spacer {
+  width: 100% !important;
+  max-width: 100% !important;
 }

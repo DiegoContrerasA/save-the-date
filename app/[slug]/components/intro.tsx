@@ -59,7 +59,8 @@ function findAnchor(h1: HTMLElement) {
  */
 export default function Intro({ name, roleMessage }: Props) {
   const root = useRef<HTMLElement>(null);
-  const chars = Array.from(name);
+  // Una palabra por línea: nombres compuestos o largos hacen salto de línea
+  const words = name.trim().split(/\s+/);
 
   useGSAP(
     () => {
@@ -160,15 +161,51 @@ export default function Intro({ name, roleMessage }: Props) {
   return (
     <section
       ref={root}
-      className="relative h-dvh w-full overflow-hidden bg-black motion-reduce:flex motion-reduce:h-auto motion-reduce:flex-col motion-reduce:overflow-visible"
+      className="relative isolate h-screen w-full overflow-hidden bg-black [contain:paint] !max-w-full !w-full motion-safe:!h-screen motion-safe:!max-h-screen motion-reduce:flex motion-reduce:h-auto motion-reduce:flex-col motion-reduce:overflow-visible"
     >
-      {/* BIENVENIDA (placeholder, debajo; se ve solo a través de las letras).
-          Fondo rojo plano temporal para poder ver el efecto; el contenido real
-          (foto, nombres, fecha) se agrega en el siguiente paso. */}
-      <div className="absolute inset-0 z-10 flex items-center justify-center bg-[#c1121f] motion-reduce:relative motion-reduce:h-dvh">
-        <p className="font-playfair text-[clamp(6rem,30vw,28rem)] font-black leading-none text-white">
-          X
+      {/* BIENVENIDA (debajo; se ve solo a través de las letras).
+          Fondo rojo plano temporal: luego se reemplaza por la foto de la pareja. */}
+      <div className="absolute inset-0 z-10 flex flex-col items-center justify-evenly bg-[#c1121f] p-5 text-center text-white motion-reduce:relative motion-reduce:min-h-screen">
+        {/* Fecha */}
+        <div>
+          <div className="flex items-center justify-center gap-[2vw] font-cormorant text-[clamp(2.5rem,7vw,6rem)] font-light leading-none tracking-[0.05em]">
+            <span>08</span>
+            <span className="inline-block h-[0.8em] w-px bg-white" />
+            <span>01</span>
+            <span className="inline-block h-[0.8em] w-px bg-white" />
+            <span>2027</span>
+          </div>
+          <p className="mt-[1.5vh] font-cormorant text-[clamp(0.75rem,1.3vw,1.1rem)] uppercase tracking-[0.35em] text-white/80">
+            Viernes, 8 de enero de 2027 · Medellín, Colombia
+          </p>
+        </div>
+
+        {/* Nombres */}
+        <p className="font-cormorant text-[clamp(1.75rem,4.2vw,3.5rem)] font-semibold uppercase leading-tight tracking-[0.08em]">
+          <span className="block">Diego Contreras</span>
+          <span className="block font-pinyon text-[1.4em] font-normal normal-case leading-none">
+            &
+          </span>
+          <span className="block">Andrea Cardona</span>
         </p>
+
+        {/* Bienvenida + mensaje (texto provisional, se puede cambiar) */}
+        <div className="flex flex-col items-center">
+          <h2 className="text-balance font-pinyon text-[clamp(2rem,5vw,4.5rem)] leading-[1.05]">
+            Bienvenidos a nuestra boda
+          </h2>
+          <div className="mt-[2vh] max-w-[min(90vw,36rem)] space-y-[1.5vh] font-cormorant text-[clamp(1rem,1.7vw,1.4rem)] italic leading-snug text-white/90">
+            <p>
+              Después de tantos caminos compartidos, decidimos recorrer el resto
+              juntos. Queremos vivir el día más importante de nuestras vidas
+              rodeados de las personas que más amamos.
+            </p>
+            <p>
+              Gracias por ser parte de nuestra historia y por acompañarnos a
+              celebrar el comienzo de la siguiente.
+            </p>
+          </div>
+        </div>
       </div>
 
       {/* Cubierta blanca: hace que la letra se vea blanca al inicio. Con el
@@ -181,17 +218,21 @@ export default function Intro({ name, roleMessage }: Props) {
       {/* Capa negra con el nombre en blanco: multiply = ventana con forma de letra */}
       <div
         data-hero-mask
-        className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center bg-black px-[4vw] mix-blend-multiply motion-reduce:relative motion-reduce:order-first motion-reduce:h-dvh motion-reduce:mix-blend-normal"
+        className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center bg-black px-5 mix-blend-multiply motion-reduce:relative motion-reduce:order-first motion-reduce:h-screen motion-reduce:mix-blend-normal"
       >
         <div data-hero-in className="w-full text-center">
           <h1
             data-hero-name
             aria-label={name}
-            className="relative text-balance font-playfair text-[clamp(4rem,15vw,15rem)] font-black uppercase leading-[0.95] tracking-tight text-white"
+            className="relative font-[family-name:var(--font-playfair)] text-[clamp(2.5rem,15vw,15rem)] [overflow-wrap:anywhere] font-black uppercase leading-[0.95] tracking-tight text-white"
           >
-            {chars.map((c, i) => (
-              <span key={i} aria-hidden data-char>
-                {c}
+            {words.map((word, wi) => (
+              <span key={wi} aria-hidden className="block">
+                {Array.from(word).map((c, ci) => (
+                  <span key={ci} data-char>
+                    {c}
+                  </span>
+                ))}
               </span>
             ))}
           </h1>
@@ -201,7 +242,7 @@ export default function Intro({ name, roleMessage }: Props) {
       {/* Textos de apoyo, fuera del blend para que se lean */}
       <div
         data-hero-ui
-        className="pointer-events-none absolute inset-0 z-30 motion-reduce:bottom-auto motion-reduce:h-dvh"
+        className="pointer-events-none absolute inset-0 z-30 motion-reduce:bottom-auto motion-reduce:h-screen"
       >
         <div data-hero-in className="absolute inset-x-0 top-[14vh] text-center">
           <p className="font-cormorant text-[clamp(0.75rem,1.4vw,1.25rem)] uppercase tracking-[0.4em] text-white/60">

@@ -54,7 +54,7 @@ export default function RootLayout({
       lang="es"
       className={`${geistSans.variable} ${geistMono.variable} ${cormorant.variable} ${pinyon.variable} ${playfair.variable} antialiased`}
     >
-      <body className="min-h-dvh bg-black text-white">
+      <body className="min-h-screen touch-pan-y overflow-x-clip overscroll-x-none bg-black text-white">
         {children}
       </body>
     </html>
