@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getGuestBySlug } from "../lib/guests";
 import Intro from "./components/intro";
+import Venue from "./components/venue";
 
 export const metadata: Metadata = {
   robots: { index: false, follow: false },
@@ -20,10 +21,7 @@ export default async function InvitationPage({
     <main className="relative z-10 w-full overflow-x-clip">
       <Intro name={guest.name} roleMessage={guest.roleMessage} />
 
-      {/* TEMPORAL: espacio para probar que el scroll continúa tras el pin */}
-      <section className="flex h-screen items-center justify-center font-cormorant text-white/60">
-        Siguiente sección…
-      </section>
+      <Venue />
     </main>
   );
 }
