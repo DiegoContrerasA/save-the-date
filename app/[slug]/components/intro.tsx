@@ -9,7 +9,6 @@ gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 type Props = {
   name: string;
-  roleMessage: string | null;
 };
 
 // Letras sin una zona sólida en su centro-izquierda: no sirven como punto de zoom
@@ -57,7 +56,7 @@ function findAnchor(h1: HTMLElement) {
  *
  * Con `prefers-reduced-motion` no hay animación: hero y bienvenida se apilan.
  */
-export default function Intro({ name, roleMessage }: Props) {
+export default function Intro({ name }: Props) {
   const root = useRef<HTMLElement>(null);
   // Una palabra por línea: nombres compuestos o largos hacen salto de línea
   const words = name.trim().split(/\s+/);
@@ -249,16 +248,6 @@ export default function Intro({ name, roleMessage }: Props) {
             Con mucho cariño para
           </p>
         </div>
-        {roleMessage && (
-          <div
-            data-hero-in
-            className="absolute inset-x-0 bottom-[16vh] flex justify-center px-6 text-center"
-          >
-            <p className="max-w-[min(90vw,40rem)] font-cormorant text-[clamp(1.25rem,2.4vw,2rem)] italic text-white/80">
-              {roleMessage}
-            </p>
-          </div>
-        )}
         <div
           data-hero-in
           className="absolute inset-x-0 bottom-[5vh] text-center"

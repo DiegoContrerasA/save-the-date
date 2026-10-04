@@ -4,7 +4,8 @@ export type Guest = {
   confirmed: boolean | null;
   vegetarian: boolean;
   restrictions: string | null;
-  roleMessage: string | null;
+  // Invitados con un rol especial en la boda (mismo mensaje para todos)
+  hasRole: boolean;
 };
 
 // TEMPORAL: datos de ejemplo mientras no existe la tabla `guests` en Supabase.
@@ -16,7 +17,7 @@ const MOCK: Record<string, Guest> = {
     confirmed: null,
     vegetarian: false,
     restrictions: null,
-    roleMessage: null,
+    hasRole: false,
   },
   "demo-rol": {
     slug: "demo-rol",
@@ -24,7 +25,7 @@ const MOCK: Record<string, Guest> = {
     confirmed: null,
     vegetarian: false,
     restrictions: null,
-    roleMessage: "Tenemos una misión muy especial para ti",
+    hasRole: true,
   },
 };
 

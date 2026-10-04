@@ -10,8 +10,7 @@ create table if not exists public.guests (
   confirmed     boolean,                                       -- null = sin responder
   vegetarian    boolean not null default false,
   restrictions  text check (char_length(restrictions) <= 500), -- alergias / restricciones
-  role          text,                                          -- null = invitado normal
-  role_payload  jsonb,                                         -- {"title","message","reveal"}
+  has_role      boolean not null default false,                -- rol especial en la boda (mensaje extra)
   table_number  int,
   responded_at  timestamptz,
   created_at    timestamptz not null default now(),
