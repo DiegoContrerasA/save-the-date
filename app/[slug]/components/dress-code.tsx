@@ -82,6 +82,13 @@ export default function DressCode() {
         data-reveal
         className="max-w-md font-cormorant text-[clamp(1.1rem,2.2vw,1.4rem)] italic leading-snug text-black/80"
       >
+        {m.dressCode.plain}
+      </p>
+
+      <p
+        data-reveal
+        className="max-w-md font-cormorant text-[clamp(1.1rem,2.2vw,1.4rem)] italic leading-snug text-black/80"
+      >
         {m.dressCode.sneakers}
       </p>
 

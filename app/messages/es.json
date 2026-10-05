@@ -56,6 +56,7 @@
   "dressCode": {
     "title": "Dress code",
     "imageAlt": "Ejemplos de vestimenta: arriba para hombres, abajo para mujeres, en tonos negro, azul, beige, blanco y verde.",
+    "plain": "Sin estampados: te pedimos usar colores lisos.",
     "sneakers": "A las niñas les recomendamos llevar tenis para la fiesta.",
     "reservedTitle": "Colores reservados",
     "reservedText": "Estos colores están reservados (tonos tierra), te pedimos no usarlos.",
