@@ -10,6 +10,8 @@ gsap.registerPlugin(useGSAP, ScrollTrigger);
 type Props = {
   name: string;
   hasRole: boolean;
+  // null = sin responder
+  confirmed: boolean | null;
 };
 
 /**
@@ -17,7 +19,7 @@ type Props = {
  * Si el invitado tiene un rol especial (flag), debajo del nombre aparece un
  * mensaje cariñoso, el mismo para todos, sin revelar de qué se trata el rol.
  */
-export default function Personal({ name, hasRole }: Props) {
+export default function Personal({ name, hasRole, confirmed }: Props) {
   const root = useRef<HTMLElement>(null);
 
   useGSAP(
@@ -62,6 +64,17 @@ export default function Personal({ name, hasRole }: Props) {
       >
         {name}
       </h2>
+
+      {confirmed !== null && (
+        <p
+          data-reveal
+          className="max-w-md font-cormorant text-[clamp(1.1rem,2.2vw,1.4rem)] italic leading-snug text-white/80"
+        >
+          {confirmed
+            ? "¡Gracias por confirmar tu asistencia!"
+            : "Entendemos que no puedas acompañarnos. Gracias por estar presente de corazón."}
+        </p>
+      )}
 
       {hasRole && (
         <div

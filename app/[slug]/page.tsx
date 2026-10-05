@@ -4,8 +4,11 @@ import { getGuestBySlug } from "../lib/guests";
 import DressCode from "./components/dress-code";
 import Envelopes from "./components/envelopes";
 import Intro from "./components/intro";
+import NoKids from "./components/no-kids";
 import Personal from "./components/personal";
 import PhotoStack from "./components/photo-stack";
+import Rsvp from "./components/rsvp";
+import Timeline from "./components/timeline";
 import Venue from "./components/venue";
 
 export const metadata: Metadata = {
@@ -26,10 +29,22 @@ export default async function InvitationPage({
       <Intro name={guest.name} />
 
       <Venue />
+      <Timeline />
       <PhotoStack />
-      <Personal name={guest.name} hasRole={guest.hasRole} />
+      <Personal
+        name={guest.name}
+        hasRole={guest.hasRole}
+        confirmed={guest.confirmed}
+      />
       <Envelopes />
       <DressCode />
+      <NoKids />
+      <Rsvp
+        slug={guest.slug}
+        confirmed={guest.confirmed}
+        vegetarian={guest.vegetarian}
+        restrictions={guest.restrictions}
+      />
     </main>
   );
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -163,46 +164,61 @@ export default function Intro({ name }: Props) {
       className="relative isolate h-screen w-full overflow-hidden bg-black [contain:paint] !max-w-full !w-full motion-safe:!h-screen motion-safe:!max-h-screen motion-reduce:flex motion-reduce:h-auto motion-reduce:flex-col motion-reduce:overflow-visible"
     >
       {/* BIENVENIDA (debajo; se ve solo a través de las letras).
-          Fondo rojo plano temporal: luego se reemplaza por la foto de la pareja. */}
-      <div className="absolute inset-0 z-10 flex flex-col items-center justify-evenly bg-[#c1121f] p-5 text-center text-white motion-reduce:relative motion-reduce:min-h-screen">
-        {/* Fecha */}
-        <div>
-          <div className="flex items-center justify-center gap-[2vw] font-cormorant text-[clamp(2.5rem,7vw,6rem)] font-light leading-none tracking-[0.05em]">
-            <span>08</span>
-            <span className="inline-block h-[0.8em] w-px bg-white" />
-            <span>01</span>
-            <span className="inline-block h-[0.8em] w-px bg-white" />
-            <span>2027</span>
+          Foto de la pareja con blur y capa negra para que el texto se lea
+          aunque la foto tenga mucha luz. */}
+      <div className="absolute inset-0 z-10 overflow-hidden bg-black motion-reduce:relative motion-reduce:min-h-screen">
+        <Image
+          src="/photos/hero.jpg"
+          alt="Diego y Andrea"
+          fill
+          priority
+          sizes="100vw"
+          className="scale-105 object-cover object-[45%_50%] blur-[3px] brightness-[0.7] saturate-[0.9]"
+          draggable={false}
+        />
+        {/* Capa negra: más densa arriba y abajo, donde va el texto */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/65 via-black/35 to-black/80" />
+
+        <div className="relative flex h-full flex-col items-center justify-evenly p-5 text-center text-white [text-shadow:0_2px_16px_rgba(0,0,0,0.6)] motion-reduce:min-h-screen">
+          {/* Fecha */}
+          <div>
+            <div className="flex items-center justify-center gap-[2vw] font-cormorant text-[clamp(2.5rem,7vw,6rem)] font-light leading-none tracking-[0.05em]">
+              <span>08</span>
+              <span className="inline-block h-[0.8em] w-px bg-white" />
+              <span>01</span>
+              <span className="inline-block h-[0.8em] w-px bg-white" />
+              <span>2027</span>
+            </div>
+            <p className="mt-[1.5vh] font-cormorant text-[clamp(0.75rem,1.3vw,1.1rem)] uppercase tracking-[0.35em] text-white/80">
+              Viernes, 8 de enero de 2027 · Medellín, Colombia
+            </p>
           </div>
-          <p className="mt-[1.5vh] font-cormorant text-[clamp(0.75rem,1.3vw,1.1rem)] uppercase tracking-[0.35em] text-white/80">
-            Viernes, 8 de enero de 2027 · Medellín, Colombia
+
+          {/* Nombres */}
+          <p className="font-cormorant text-[clamp(1.75rem,4.2vw,3.5rem)] font-semibold uppercase leading-tight tracking-[0.08em]">
+            <span className="block">Diego Contreras</span>
+            <span className="block font-pinyon text-[1.4em] font-normal normal-case leading-none">
+              &
+            </span>
+            <span className="block">Andrea Cardona</span>
           </p>
-        </div>
 
-        {/* Nombres */}
-        <p className="font-cormorant text-[clamp(1.75rem,4.2vw,3.5rem)] font-semibold uppercase leading-tight tracking-[0.08em]">
-          <span className="block">Diego Contreras</span>
-          <span className="block font-pinyon text-[1.4em] font-normal normal-case leading-none">
-            &
-          </span>
-          <span className="block">Andrea Cardona</span>
-        </p>
-
-        {/* Bienvenida + mensaje (texto provisional, se puede cambiar) */}
-        <div className="flex flex-col items-center">
-          <h2 className="text-balance font-pinyon text-[clamp(2rem,5vw,4.5rem)] leading-[1.05]">
-            Bienvenidos a nuestra boda
-          </h2>
-          <div className="mt-[2vh] max-w-[min(90vw,36rem)] space-y-[1.5vh] font-cormorant text-[clamp(1rem,1.7vw,1.4rem)] italic leading-snug text-white/90">
-            <p>
-              Después de tantos caminos compartidos, decidimos recorrer el resto
-              juntos. Queremos vivir el día más importante de nuestras vidas
-              rodeados de las personas que más amamos.
-            </p>
-            <p>
-              Gracias por ser parte de nuestra historia y por acompañarnos a
-              celebrar el comienzo de la siguiente.
-            </p>
+          {/* Bienvenida + mensaje (texto provisional, se puede cambiar) */}
+          <div className="flex flex-col items-center">
+            <h2 className="text-balance font-pinyon text-[clamp(2rem,5vw,4.5rem)] leading-[1.05]">
+              Bienvenidos a nuestra boda
+            </h2>
+            <div className="mt-[2vh] max-w-[min(90vw,36rem)] space-y-[1.5vh] font-cormorant text-[clamp(1rem,1.7vw,1.4rem)] italic leading-snug text-white/90">
+              <p>
+                Después de tantos caminos compartidos, decidimos recorrer el
+                resto juntos. Queremos vivir el día más importante de nuestras
+                vidas rodeados de las personas que más amamos.
+              </p>
+              <p>
+                Gracias por ser parte de nuestra historia y por acompañarnos a
+                celebrar el comienzo de la siguiente.
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -217,7 +233,7 @@ export default function Intro({ name }: Props) {
       {/* Capa negra con el nombre en blanco: multiply = ventana con forma de letra */}
       <div
         data-hero-mask
-        className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center bg-black px-5 mix-blend-multiply motion-reduce:relative motion-reduce:order-first motion-reduce:h-screen motion-reduce:mix-blend-normal"
+        className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center bg-neutral-900 px-5 mix-blend-multiply motion-reduce:relative motion-reduce:order-first motion-reduce:h-screen motion-reduce:mix-blend-normal"
       >
         <div data-hero-in className="w-full text-center">
           <h1

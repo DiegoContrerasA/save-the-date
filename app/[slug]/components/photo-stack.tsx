@@ -8,14 +8,27 @@ import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
-type Photo = { src?: string; alt: string };
+type Photo = { src?: string; alt: string; position?: string };
 
-// Reemplazar `src` cuando lleguen las fotos (van en /public/photos/...).
-// Mientras no haya `src` se muestra un cuadro de relleno.
+// Fotos en /public/photos (4:5, 960px de ancho o más). `position` es el punto
+// de enfoque (object-position) para que no se corten las caras en el formato
+// horizontal de escritorio.
 const PHOTOS: Photo[] = [
-  { alt: "Diego y Andrea, foto 1" },
-  { alt: "Diego y Andrea, foto 2" },
-  { alt: "Diego y Andrea, foto 3" },
+  {
+    src: "/photos/1.jpg",
+    alt: "Diego y Andrea riendo junto al árbol de Navidad",
+    position: "50% 38%",
+  },
+  {
+    src: "/photos/2.jpg",
+    alt: "Diego y Andrea abrazados en la plaza de Villa de Leyva",
+    position: "50% 35%",
+  },
+  {
+    src: "/photos/3.jpg",
+    alt: "Diego y Andrea posando juntos en un parque",
+    position: "50% 40%",
+  },
 ];
 
 const PLACEHOLDER_TINTS = [
@@ -53,6 +66,12 @@ export default function PhotoStack() {
           },
         });
 
+        const imgs = gsap.utils.toArray<HTMLElement>("[data-card-img]");
+        const dims = gsap.utils.toArray<HTMLElement>("[data-card-dim]");
+
+        // la primera foto se "asienta": zoom suave que se acerca a su tamaño
+        tl.fromTo(imgs[0], { scale: 1.12 }, { scale: 1, duration: 1 }, 0);
+
         cards.forEach((card, i) => {
           if (i === 0) return;
           const dir = i % 2 ? 1 : -1;
@@ -63,12 +82,20 @@ export default function PhotoStack() {
             { yPercent: 0, rotate: 0, ease: "power2.out", duration: 1 },
             i - 1,
           );
-          // la anterior se queda asomando con una pequeña rotación
+          // efecto: llega con zoom y desenfoque que se aclaran al asentarse
+          tl.fromTo(
+            imgs[i],
+            { scale: 1.3, filter: "blur(5px)" },
+            { scale: 1, filter: "blur(0px)", ease: "power2.out", duration: 1 },
+            i - 1,
+          );
+          // la anterior se queda asomando con una pequeña rotación y se oscurece
           tl.to(
             cards[i - 1],
             { rotate: -dir * 6, scale: 0.96, duration: 1 },
             i - 1,
           );
+          tl.to(dims[i - 1], { opacity: 0.55, duration: 1 }, i - 1);
         });
 
         // pausa final con la última foto completa antes de soltar el pin
@@ -93,14 +120,27 @@ export default function PhotoStack() {
           style={{ zIndex: i + 1 }}
         >
           {photo.src ? (
-            <Image
-              src={photo.src}
-              alt={photo.alt}
-              fill
-              sizes="(min-width: 768px) 52rem, 90vw"
-              className="object-cover"
-              draggable={false}
-            />
+            <>
+              <div data-card-img className="absolute inset-0">
+                <Image
+                  src={photo.src}
+                  alt={photo.alt}
+                  fill
+                  sizes="(min-width: 768px) 52rem, 90vw"
+                  priority={i === 0}
+                  className="object-cover brightness-[0.82] saturate-[0.9]"
+                  style={{ objectPosition: photo.position }}
+                  draggable={false}
+                />
+              </div>
+              {/* capa negra como la del hero: más densa arriba y abajo */}
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/45 via-black/15 to-black/55" />
+              {/* oscurece la foto cuando otra queda encima */}
+              <div
+                data-card-dim
+                className="pointer-events-none absolute inset-0 bg-black opacity-0"
+              />
+            </>
           ) : (
             <div
               role="img"

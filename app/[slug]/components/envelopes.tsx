@@ -198,19 +198,14 @@ export default function Envelopes() {
         <BigEnvelope />
       </div>
 
-      <h2
-        data-reveal
-        className="font-pinyon text-[clamp(3rem,14vw,7rem)] leading-[1.05]"
-      >
-        Lluvia de sobres
-      </h2>
-
-      <p
-        data-reveal
-        className="max-w-md font-cormorant text-[clamp(1.1rem,2.2vw,1.4rem)] italic leading-snug text-white/80"
-      >
-        Para nuestro regalo hemos elegido una lluvia de sobres.
-      </p>
+      <div data-reveal className="flex flex-col items-center gap-4">
+        <p className="font-cormorant text-sm uppercase tracking-[0.4em] text-white/60">
+          Regalo
+        </p>
+        <h2 className="font-pinyon text-[clamp(3rem,14vw,7rem)] leading-[1.05]">
+          Lluvia de sobres
+        </h2>
+      </div>
     </section>
   );
 }

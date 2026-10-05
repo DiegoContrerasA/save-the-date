@@ -16,4 +16,12 @@ export const EVENT = {
   },
   // Hora de llegada (recepción)
   arrival: "4:00 pm",
+  // Minuto a minuto
+  schedule: [
+    { time: "4:00 pm", label: "Recepción" },
+    { time: "4:15 pm", label: "Ceremonia" },
+    { time: "5:30 pm", label: "Cóctel" },
+    { time: "7:30 pm", label: "Cena" },
+    { time: "9:00 pm", label: "Rumba" },
+  ],
 } as const;

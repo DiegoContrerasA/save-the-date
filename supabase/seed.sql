@@ -113,3 +113,20 @@ insert into public.guests (slug, name, phone, confirmed) values
   ('andrea-ruiz', 'Andrea Ruiz', null, null),
   ('andres-andrea-ruiz', 'Andres', null, null)
 on conflict (slug) do nothing;
+
+-- Capitanes de mesa (has_role = true). Se puede correr por separado sobre una
+-- tabla que ya tiene datos: el insert de arriba no actualiza filas existentes.
+update public.guests set has_role = true where slug in (
+  'santiago-cardona',
+  'david-carvajal',
+  'alberto-cardona',
+  'juan-esteban-cardona',
+  'carlos-ortega',
+  'pauli-zarrabe',
+  'daniel-moncada',
+  'ana-maria-rios',
+  'felipe-ruiz',
+  'veronica-perez',
+  'andrea-quintero',
+  'lorena-builes'
+);
