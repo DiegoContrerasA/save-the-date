@@ -235,7 +235,16 @@ export default function Intro({ name }: Props) {
           <h1
             data-hero-name
             aria-label={name}
-            className="relative font-[family-name:var(--font-playfair)] text-[clamp(2.5rem,15vw,15rem)] [overflow-wrap:anywhere] font-black uppercase leading-[0.95] tracking-tight text-white"
+            className="relative font-[family-name:var(--font-playfair)] [overflow-wrap:anywhere] font-black uppercase leading-[0.95] tracking-tight text-white"
+            // Tamaño: no más de 11rem, ni de 15vw, ni de lo que cabe en ~64% del
+            // alto con una línea por palabra (deja libres los textos de apoyo).
+            style={
+              {
+                "--lines": words.length,
+                fontSize:
+                  "clamp(2.5rem, min(15vw, calc(64svh / (var(--lines) * 0.95))), 11rem)",
+              } as React.CSSProperties
+            }
           >
             {words.map((word, wi) => (
               <span key={wi} aria-hidden className="block">

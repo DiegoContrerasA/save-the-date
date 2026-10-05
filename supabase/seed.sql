@@ -113,5 +113,12 @@ insert into public.guests (slug, name, phone, confirmed, language, has_role) val
   ('andrea-ruiz', 'Andrea Ruiz', null, null, 'es', false),
   ('andres-munoz', 'Andres Muñoz', null, null, 'es', false),
   ('andrea-cardona', 'Andrea Cardona', null, null, 'es', false),
-  ('diego-contreras', 'Diego Contreras', null, null, 'es', false)
+  ('diego-contreras', 'Diego Contreras', null, null, 'es', false),
+  ('carlos-cardona', 'Carlos Cardona', null, null, 'es', false),
+  ('mari-castro', 'Mari Castro', null, null, 'es', false),
+  ('johan-cardona', 'Johan Cardona', null, null, 'es', false),
+  ('laura-claro', 'Laura Claro', null, null, 'es', false),
+  ('carlos-rueda', 'Carlos Rueda', null, null, 'es', false),
+  ('carlos-osorio', 'Carlos Osorio', null, null, 'es', false),
+  ('maria-camila-rincon', 'Maria Camila Rincon', null, null, 'es', false)
 on conflict (slug) do nothing;
