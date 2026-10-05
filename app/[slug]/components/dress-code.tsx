@@ -5,6 +5,7 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { useMessages } from "../../lib/i18n";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -24,6 +25,7 @@ const RESERVED_COLORS = [
 
 /** Dress code: imagen de referencia, nota sobre tenis y colores reservados. */
 export default function DressCode() {
+  const m = useMessages();
   const root = useRef<HTMLElement>(null);
 
   useGSAP(
@@ -59,7 +61,7 @@ export default function DressCode() {
         data-reveal
         className="font-pinyon text-[clamp(3.75rem,17vw,9rem)] leading-[1.05]"
       >
-        Dress code
+        {m.dressCode.title}
       </h2>
 
       <div
@@ -68,7 +70,7 @@ export default function DressCode() {
       >
         <Image
           src="/dress-code/dress-code.webp"
-          alt="Ejemplos de vestimenta: arriba para hombres, abajo para mujeres, en tonos negro, azul, beige, blanco y verde."
+          alt={m.dressCode.imageAlt}
           fill
           sizes="(min-width: 480px) 26rem, 90vw"
           className="object-contain"
@@ -80,23 +82,23 @@ export default function DressCode() {
         data-reveal
         className="max-w-md font-cormorant text-[clamp(1.1rem,2.2vw,1.4rem)] italic leading-snug text-black/80"
       >
-        A las niñas les recomendamos llevar tenis para la fiesta.
+        {m.dressCode.sneakers}
       </p>
 
       <div data-reveal className="flex max-w-lg flex-col items-center gap-7">
         <span className="h-px w-12 bg-black/40" />
         <p className="font-cormorant text-base uppercase tracking-[0.4em] text-black/60">
-          Colores reservados
+          {m.dressCode.reservedTitle}
         </p>
         <p className="font-cormorant text-[clamp(1.25rem,2.6vw,1.6rem)] italic leading-snug text-black/80">
-          Estos colores están reservados (tonos tierra), te pedimos no usarlos.
+          {m.dressCode.reservedText}
         </p>
         <ul className="flex flex-wrap justify-center gap-5">
           {RESERVED_COLORS.map((color) => (
             <li
               key={color}
               title={color}
-              aria-label={`Color reservado ${color}`}
+              aria-label={`${m.dressCode.colorLabel} ${color}`}
               className="h-12 w-12 rounded-full ring-1 ring-black/30 ring-offset-2 ring-offset-white"
               style={{ backgroundColor: color }}
             />

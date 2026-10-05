@@ -1,4 +1,5 @@
 import { getSupabase } from "./db";
+import type { Lang } from "./messages";
 
 export type Guest = {
   slug: string;
@@ -9,6 +10,8 @@ export type Guest = {
   restrictions: string | null;
   // Invitados con un rol especial en la boda (mismo mensaje para todos)
   hasRole: boolean;
+  // Idioma de la invitación
+  language: Lang;
 };
 
 export async function getGuestBySlug(slug: string): Promise<Guest | null> {
@@ -43,5 +46,6 @@ export async function getGuestBySlug(slug: string): Promise<Guest | null> {
     vegetarian: data.vegetarian,
     restrictions: data.restrictions,
     hasRole: data.has_role,
+    language: data.language === "en" ? "en" : "es",
   };
 }

@@ -1,5 +1,5 @@
 -- Invitación de boda · tabla `guests` (una fila por persona)
--- Ejecutar en Supabase → SQL Editor.
+-- Ejecutar en Supabase → SQL Editor, en este orden: schema.sql, seed.sql, rpc.sql.
 
 create table if not exists public.guests (
   id            uuid primary key default gen_random_uuid(),
@@ -10,11 +10,13 @@ create table if not exists public.guests (
   confirmed     boolean,                                       -- null = sin responder
   vegetarian    boolean not null default false,
   restrictions  text check (char_length(restrictions) <= 500), -- alergias / restricciones
-  has_role      boolean not null default false                 -- rol especial en la boda (mensaje extra)
+  has_role      boolean not null default false,                -- rol especial en la boda (mensaje extra)
+  language      text not null default 'es'
+                  check (language in ('en', 'es'))             -- idioma de la invitación
 );
 
--- Seguridad: RLS activado SIN policies => solo la service role key (servidor)
--- puede leer/escribir. El navegador con la anon/publishable key no ve nada.
+-- Seguridad: RLS activado SIN policies => la publishable key no puede leer ni
+-- escribir la tabla. La app solo accede por las funciones de rpc.sql.
 alter table public.guests enable row level security;
 
 -- Consultas útiles (SQL Editor):

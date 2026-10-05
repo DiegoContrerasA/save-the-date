@@ -5,10 +5,11 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { useMessages } from "../../lib/i18n";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
-type Photo = { src?: string; alt: string; position?: string };
+type Photo = { src?: string; position?: string };
 
 // Fotos en /public/photos (4:5, 960px de ancho o más). `position` es el punto
 // de enfoque (object-position) para que no se corten las caras en el formato
@@ -16,17 +17,14 @@ type Photo = { src?: string; alt: string; position?: string };
 const PHOTOS: Photo[] = [
   {
     src: "/photos/1.jpg",
-    alt: "Diego y Andrea riendo junto al árbol de Navidad",
     position: "50% 38%",
   },
   {
     src: "/photos/2.jpg",
-    alt: "Diego y Andrea abrazados en la plaza de Villa de Leyva",
     position: "50% 35%",
   },
   {
     src: "/photos/3.jpg",
-    alt: "Diego y Andrea posando juntos en un parque",
     position: "50% 40%",
   },
 ];
@@ -44,6 +42,7 @@ const PLACEHOLDER_TINTS = [
  * Con `prefers-reduced-motion` no hay pin: las fotos se muestran en columna.
  */
 export default function PhotoStack() {
+  const m = useMessages();
   const root = useRef<HTMLElement>(null);
 
   useGSAP(
@@ -124,7 +123,7 @@ export default function PhotoStack() {
               <div data-card-img className="absolute inset-0">
                 <Image
                   src={photo.src}
-                  alt={photo.alt}
+                  alt={m.photos.alts[i]}
                   fill
                   sizes="(min-width: 768px) 52rem, 90vw"
                   priority={i === 0}
@@ -144,7 +143,7 @@ export default function PhotoStack() {
           ) : (
             <div
               role="img"
-              aria-label={photo.alt}
+              aria-label={m.photos.alts[i]}
               className={`flex h-full w-full items-center justify-center bg-gradient-to-br ${PLACEHOLDER_TINTS[i % PLACEHOLDER_TINTS.length]}`}
             >
               <span className="font-cormorant text-2xl uppercase tracking-[0.3em] text-white/70">

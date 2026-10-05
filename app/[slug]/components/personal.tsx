@@ -4,6 +4,7 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { useMessages } from "../../lib/i18n";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -20,6 +21,7 @@ type Props = {
  * mensaje cariñoso, el mismo para todos, sin revelar de qué se trata el rol.
  */
 export default function Personal({ name, hasRole, confirmed }: Props) {
+  const m = useMessages();
   const root = useRef<HTMLElement>(null);
 
   useGSAP(
@@ -55,7 +57,7 @@ export default function Personal({ name, hasRole, confirmed }: Props) {
         data-reveal
         className="font-cormorant text-sm uppercase tracking-[0.4em] text-white/60"
       >
-        Esta invitación es personal
+        {m.personal.label}
       </p>
 
       <h2
@@ -70,9 +72,7 @@ export default function Personal({ name, hasRole, confirmed }: Props) {
           data-reveal
           className="max-w-md font-cormorant text-[clamp(1.1rem,2.2vw,1.4rem)] italic leading-snug text-white/80"
         >
-          {confirmed
-            ? "¡Gracias por confirmar tu asistencia!"
-            : "Entendemos que no puedas acompañarnos. Gracias por estar presente de corazón."}
+          {confirmed ? m.personal.confirmed : m.personal.declined}
         </p>
       )}
 
@@ -83,13 +83,10 @@ export default function Personal({ name, hasRole, confirmed }: Props) {
         >
           <span className="h-px w-12 bg-white/40" />
           <p className="font-[family-name:var(--font-playfair)] text-[clamp(1.5rem,5vw,2.25rem)] font-extrabold leading-tight">
-            Tú no eres un invitado más
+            {m.personal.roleTitle}
           </p>
           <p className="font-cormorant text-[clamp(1.1rem,2.2vw,1.4rem)] italic leading-snug text-white/80">
-            Entre todas las personas que amamos, te elegimos a ti para tener un
-            papel muy especial en nuestra boda. Tu energía hace la diferencia,
-            por eso queremos que ese día vengas con la mejor actitud y las ganas
-            de vivirlo con nosotros.
+            {m.personal.roleBody}
           </p>
         </div>
       )}

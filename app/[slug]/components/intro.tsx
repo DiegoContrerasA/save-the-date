@@ -5,6 +5,7 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { useMessages } from "../../lib/i18n";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -58,6 +59,7 @@ function findAnchor(h1: HTMLElement) {
  * Con `prefers-reduced-motion` no hay animación: hero y bienvenida se apilan.
  */
 export default function Intro({ name }: Props) {
+  const m = useMessages();
   const root = useRef<HTMLElement>(null);
   // Una palabra por línea: nombres compuestos o largos hacen salto de línea
   const words = name.trim().split(/\s+/);
@@ -169,7 +171,7 @@ export default function Intro({ name }: Props) {
       <div className="absolute inset-0 z-10 overflow-hidden bg-black motion-reduce:relative motion-reduce:min-h-screen">
         <Image
           src="/photos/hero.jpg"
-          alt="Diego y Andrea"
+          alt={m.hero.imageAlt}
           fill
           priority
           sizes="100vw"
@@ -190,7 +192,7 @@ export default function Intro({ name }: Props) {
               <span>2027</span>
             </div>
             <p className="mt-[1.5vh] font-cormorant text-[clamp(0.75rem,1.3vw,1.1rem)] uppercase tracking-[0.35em] text-white/80">
-              Viernes, 8 de enero de 2027 · Medellín, Colombia
+              {m.event.dateLabel} · {m.event.city}
             </p>
           </div>
 
@@ -206,18 +208,12 @@ export default function Intro({ name }: Props) {
           {/* Bienvenida + mensaje (texto provisional, se puede cambiar) */}
           <div className="flex flex-col items-center">
             <h2 className="text-balance font-pinyon text-[clamp(2rem,5vw,4.5rem)] leading-[1.05]">
-              Bienvenidos a nuestra boda
+              {m.hero.welcomeTitle}
             </h2>
             <div className="mt-[2vh] max-w-[min(90vw,36rem)] space-y-[1.5vh] font-cormorant text-[clamp(1rem,1.7vw,1.4rem)] italic leading-snug text-white/90">
-              <p>
-                Después de tantos caminos compartidos, decidimos recorrer el
-                resto juntos. Queremos vivir el día más importante de nuestras
-                vidas rodeados de las personas que más amamos.
-              </p>
-              <p>
-                Gracias por ser parte de nuestra historia y por acompañarnos a
-                celebrar el comienzo de la siguiente.
-              </p>
+              {m.hero.welcome.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
             </div>
           </div>
         </div>
@@ -261,7 +257,7 @@ export default function Intro({ name }: Props) {
       >
         <div data-hero-in className="absolute inset-x-0 top-[14vh] text-center">
           <p className="font-cormorant text-[clamp(0.75rem,1.4vw,1.25rem)] uppercase tracking-[0.4em] text-white/60">
-            Con mucho cariño para
+            {m.hero.for}
           </p>
         </div>
         <div
@@ -269,7 +265,7 @@ export default function Intro({ name }: Props) {
           className="absolute inset-x-0 bottom-[5vh] text-center"
         >
           <p className="font-cormorant text-xs uppercase tracking-[0.35em] text-white/50">
-            Desliza
+            {m.hero.scroll}
           </p>
         </div>
       </div>

@@ -5,11 +5,13 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { EVENT } from "../../lib/event";
+import { useMessages } from "../../lib/i18n";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 /** Lugar, fecha y hora, con botón para abrir Google Maps. */
 export default function Venue() {
+  const m = useMessages();
   const root = useRef<HTMLElement>(null);
 
   useGSAP(
@@ -45,7 +47,7 @@ export default function Venue() {
         data-reveal
         className="font-cormorant text-sm uppercase tracking-[0.4em] text-white/60"
       >
-        Te esperamos en
+        {m.venue.intro}
       </p>
 
       <h2
@@ -59,17 +61,15 @@ export default function Venue() {
         data-reveal
         className="flex flex-col items-center gap-2 font-cormorant text-[clamp(1.25rem,3vw,2rem)]"
       >
-        <p>{EVENT.dateLabel}</p>
-        <p className="text-white/70">Recepción · {EVENT.arrival}</p>
-        <p className="text-white/70">{EVENT.city}</p>
+        <p>{m.event.dateLabel}</p>
+        <p className="text-white/70">{m.venue.reception} · {EVENT.arrival}</p>
+        <p className="text-white/70">{m.event.city}</p>
       </div>
 
       <div data-reveal className="flex max-w-md flex-col items-center gap-5">
         <span className="h-px w-12 bg-white/40" />
         <p className="font-cormorant text-[clamp(1.1rem,2.2vw,1.4rem)] italic leading-snug text-white/80">
-          Los parqueaderos son limitados. Te sugerimos venir con otros invitados
-          en un mismo carro o llegar en Uber, así todos disfrutamos la noche con
-          más tranquilidad.
+          {m.venue.parking}
         </p>
         <span className="h-px w-12 bg-white/40" />
       </div>
@@ -79,8 +79,8 @@ export default function Venue() {
         className="flex flex-col items-center justify-center gap-4 sm:flex-row"
       >
         {[
-          { label: "Google Maps", href: EVENT.venue.mapsUrl },
-          { label: "Waze", href: EVENT.venue.wazeUrl },
+          { label: m.venue.maps, href: EVENT.venue.mapsUrl },
+          { label: m.venue.waze, href: EVENT.venue.wazeUrl },
         ].map(({ label, href }) => (
           <a
             key={label}

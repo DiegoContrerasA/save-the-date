@@ -1,0 +1,91 @@
+{
+  "meta": {
+    "title": "Invitación de boda · Diego & Andrea · 08.01.2027",
+    "description": "Nos casamos el 8 de enero de 2027 en Medellín, Colombia. ¡Te esperamos!"
+  },
+  "event": {
+    "dateLabel": "Viernes, 8 de enero de 2027",
+    "city": "Medellín, Colombia"
+  },
+  "hero": {
+    "imageAlt": "Diego y Andrea",
+    "for": "Con mucho cariño para",
+    "scroll": "Desliza",
+    "welcomeTitle": "Bienvenidos a nuestra boda",
+    "welcome": [
+      "Después de tantos caminos compartidos, decidimos recorrer el resto juntos. Queremos vivir el día más importante de nuestras vidas rodeados de las personas que más amamos.",
+      "Gracias por ser parte de nuestra historia y por acompañarnos a celebrar el comienzo de la siguiente."
+    ]
+  },
+  "venue": {
+    "intro": "Te esperamos en",
+    "reception": "Recepción",
+    "parking": "Los parqueaderos son limitados. Te sugerimos venir con otros invitados en un mismo carro o llegar en Uber, así todos disfrutamos la noche con más tranquilidad.",
+    "maps": "Google Maps",
+    "waze": "Waze"
+  },
+  "timeline": {
+    "title": "Minuto a minuto",
+    "items": {
+      "reception": "Recepción",
+      "ceremony": "Ceremonia",
+      "cocktail": "Cóctel",
+      "dinner": "Cena",
+      "party": "Rumba"
+    }
+  },
+  "photos": {
+    "alts": [
+      "Diego y Andrea riendo junto al árbol de Navidad",
+      "Diego y Andrea abrazados en la plaza de Villa de Leyva",
+      "Diego y Andrea posando juntos en un parque"
+    ]
+  },
+  "personal": {
+    "label": "Esta invitación es personal",
+    "confirmed": "¡Gracias por confirmar tu asistencia!",
+    "declined": "Entendemos que no puedas acompañarnos. Gracias por estar presente de corazón.",
+    "roleTitle": "Tú no eres un invitado más",
+    "roleBody": "Entre todas las personas que amamos, te elegimos a ti para tener un papel muy especial en nuestra boda. Tu energía hace la diferencia, por eso queremos que ese día vengas con la mejor actitud y las ganas de vivirlo con nosotros."
+  },
+  "envelopes": {
+    "label": "Regalo",
+    "title": "Lluvia de sobres",
+    "envelopeAlt": "Sobre"
+  },
+  "dressCode": {
+    "title": "Dress code",
+    "imageAlt": "Ejemplos de vestimenta: arriba para hombres, abajo para mujeres, en tonos negro, azul, beige, blanco y verde.",
+    "sneakers": "A las niñas les recomendamos llevar tenis para la fiesta.",
+    "reservedTitle": "Colores reservados",
+    "reservedText": "Estos colores están reservados (tonos tierra), te pedimos no usarlos.",
+    "colorLabel": "Color reservado"
+  },
+  "noKids": {
+    "title": "Solo adultos",
+    "text": "Queremos que este día sea una noche para disfrutar sin preocupaciones. Por eso no podremos recibir niños en la fiesta. Gracias por entender."
+  },
+  "rsvp": {
+    "title": "Confirma tu asistencia",
+    "vegetarianQuestion": "¿Eres vegetariano?",
+    "restrictionsQuestion": "¿Tienes alguna restricción o alergia alimentaria?",
+    "yes": "Sí",
+    "no": "No",
+    "restrictionsLabel": "Restricciones o alergias",
+    "restrictionsPlaceholder": "Cuéntanos cuál",
+    "restrictionsRequired": "Cuéntanos cuál es tu restricción o alergia.",
+    "saving": "Guardando",
+    "confirm": "Confirmar asistencia",
+    "decline": "No podré asistir",
+    "cancel": "Cancelar",
+    "thanksTitle": "¡Gracias por confirmar tu asistencia! ✨",
+    "thanksBody": "Nos hace muy felices saber que nos acompañarás en este día tan especial.",
+    "vegetarian": "Vegetariano",
+    "notVegetarian": "No vegetariano",
+    "declinedTitle": "Entendemos que no puedas acompañarnos",
+    "declinedBody": "Gracias por estar presente de corazón 🤍",
+    "change": "Cambiar mi respuesta",
+    "errorInvalid": "Revisa los datos e inténtalo de nuevo.",
+    "errorSave": "No pudimos guardar tu respuesta."
+  }
+}

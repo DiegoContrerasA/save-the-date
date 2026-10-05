@@ -4,11 +4,13 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { useMessages } from "../../lib/i18n";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 /** Aviso amable: la fiesta es solo para adultos. */
 export default function NoKids() {
+  const m = useMessages();
   const root = useRef<HTMLElement>(null);
 
   useGSAP(
@@ -44,7 +46,7 @@ export default function NoKids() {
         data-reveal
         className="font-pinyon text-[clamp(3rem,14vw,7rem)] leading-[1.05]"
       >
-        Solo adultos
+        {m.noKids.title}
       </h2>
 
       <span data-reveal className="h-px w-12 bg-white/40" />
@@ -53,8 +55,7 @@ export default function NoKids() {
         data-reveal
         className="max-w-md font-cormorant text-[clamp(1.1rem,2.2vw,1.4rem)] italic leading-snug text-white/80"
       >
-        Queremos que este día sea una noche para disfrutar sin preocupaciones.
-        Por eso no podremos recibir niños en la fiesta. Gracias por entender.
+        {m.noKids.text}
       </p>
     </section>
   );

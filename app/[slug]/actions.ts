@@ -11,12 +11,14 @@ const schema = z.object({
   restrictions: z.string().trim().max(500).nullable(),
 });
 
-export type RsvpResult = { ok: true } | { ok: false; error: string };
+export type RsvpResult =
+  | { ok: true }
+  | { ok: false; error: "invalid" | "save" };
 
 export async function saveRsvp(input: unknown): Promise<RsvpResult> {
   const parsed = schema.safeParse(input);
   if (!parsed.success) {
-    return { ok: false, error: "Revisa los datos e inténtalo de nuevo." };
+    return { ok: false, error: "invalid" };
   }
   const { slug, confirmed } = parsed.data;
 
@@ -25,7 +27,7 @@ export async function saveRsvp(input: unknown): Promise<RsvpResult> {
   const restrictions = confirmed ? parsed.data.restrictions || null : null;
 
   const db = getSupabase();
-  if (!db) return { ok: false, error: "No pudimos guardar tu respuesta." };
+  if (!db) return { ok: false, error: "save" };
 
   const { data: updated, error } = await db.rpc("save_rsvp", {
     p_slug: slug,
@@ -36,7 +38,7 @@ export async function saveRsvp(input: unknown): Promise<RsvpResult> {
 
   if (error || !updated) {
     console.error(error);
-    return { ok: false, error: "No pudimos guardar tu respuesta." };
+    return { ok: false, error: "save" };
   }
 
   revalidatePath("/", "layout");

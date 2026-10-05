@@ -2,23 +2,27 @@
 -- abrir la tabla `guests`: RLS sigue activo sin policies, así que nadie puede
 -- listar invitados ni ver teléfonos. Solo se puede buscar UN invitado por su
 -- slug exacto y guardar su propia respuesta.
--- Ejecutar en Supabase → SQL Editor (después de schema.sql).
+-- Ejecutar en Supabase → SQL Editor, en este orden: schema.sql, seed.sql, rpc.sql.
 
-create or replace function public.get_guest(p_slug text)
+-- Si ya existía una versión anterior con otro tipo de retorno, se reemplaza.
+drop function if exists public.get_guest(text);
+
+create function public.get_guest(p_slug text)
 returns table (
   slug         text,
   name         text,
   confirmed    boolean,
   vegetarian   boolean,
   restrictions text,
-  has_role     boolean
+  has_role     boolean,
+  language     text
 )
 language sql
 stable
 security definer
 set search_path = ''
 as $$
-  select g.slug, g.name, g.confirmed, g.vegetarian, g.restrictions, g.has_role
+  select g.slug, g.name, g.confirmed, g.vegetarian, g.restrictions, g.has_role, g.language
   from public.guests g
   where g.slug = p_slug;
 $$;

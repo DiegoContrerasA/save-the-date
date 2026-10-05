@@ -1,0 +1,91 @@
+{
+  "meta": {
+    "title": "Wedding invitation · Diego & Andrea · 01.08.2027",
+    "description": "We're getting married on January 8, 2027 in Medellín, Colombia. We can't wait to see you!"
+  },
+  "event": {
+    "dateLabel": "Friday, January 8, 2027",
+    "city": "Medellín, Colombia"
+  },
+  "hero": {
+    "imageAlt": "Diego and Andrea",
+    "for": "With all our love for",
+    "scroll": "Scroll",
+    "welcomeTitle": "Welcome to our wedding",
+    "welcome": [
+      "After so many shared paths, we decided to walk the rest of the way together. We want to live the most important day of our lives surrounded by the people we love most.",
+      "Thank you for being part of our story and for joining us to celebrate the beginning of the next chapter."
+    ]
+  },
+  "venue": {
+    "intro": "We'll be waiting for you at",
+    "reception": "Reception",
+    "parking": "Parking is limited. We suggest carpooling with other guests or arriving by Uber, so we can all enjoy the night with more peace of mind.",
+    "maps": "Google Maps",
+    "waze": "Waze"
+  },
+  "timeline": {
+    "title": "Minute by minute",
+    "items": {
+      "reception": "Reception",
+      "ceremony": "Ceremony",
+      "cocktail": "Cocktail",
+      "dinner": "Dinner",
+      "party": "Party"
+    }
+  },
+  "photos": {
+    "alts": [
+      "Diego and Andrea laughing next to the Christmas tree",
+      "Diego and Andrea hugging in the main square of Villa de Leyva",
+      "Diego and Andrea posing together in a park"
+    ]
+  },
+  "personal": {
+    "label": "This invitation is personal",
+    "confirmed": "Thank you for confirming your attendance!",
+    "declined": "We understand you can't join us. Thank you for being with us in spirit.",
+    "roleTitle": "You are not just another guest",
+    "roleBody": "Among all the people we love, we chose you to play a very special role at our wedding. Your energy makes a difference, so we want you to come that day with the best attitude and the desire to live it with us."
+  },
+  "envelopes": {
+    "label": "Gift",
+    "title": "Envelope shower",
+    "envelopeAlt": "Envelope"
+  },
+  "dressCode": {
+    "title": "Dress code",
+    "imageAlt": "Outfit examples: men on top, women on the bottom, in black, blue, beige, white and green tones.",
+    "sneakers": "We recommend that the girls wear sneakers for the party.",
+    "reservedTitle": "Reserved colors",
+    "reservedText": "These colors are reserved (earth tones), please don't wear them.",
+    "colorLabel": "Reserved color"
+  },
+  "noKids": {
+    "title": "Adults only",
+    "text": "We want this to be a night to enjoy without worries. For that reason, we won't be able to welcome children at the party. Thank you for understanding."
+  },
+  "rsvp": {
+    "title": "Confirm your attendance",
+    "vegetarianQuestion": "Are you vegetarian?",
+    "restrictionsQuestion": "Do you have any food restriction or allergy?",
+    "yes": "Yes",
+    "no": "No",
+    "restrictionsLabel": "Restrictions or allergies",
+    "restrictionsPlaceholder": "Tell us which",
+    "restrictionsRequired": "Tell us which restriction or allergy.",
+    "saving": "Saving",
+    "confirm": "Confirm attendance",
+    "decline": "I won't be able to attend",
+    "cancel": "Cancel",
+    "thanksTitle": "Thank you for confirming your attendance! ✨",
+    "thanksBody": "We are so happy to know you will join us on this special day.",
+    "vegetarian": "Vegetarian",
+    "notVegetarian": "Not vegetarian",
+    "declinedTitle": "We understand you can't join us",
+    "declinedBody": "Thank you for being with us in spirit 🤍",
+    "change": "Change my answer",
+    "errorInvalid": "Please check your answers and try again.",
+    "errorSave": "We couldn't save your answer."
+  }
+}

@@ -5,12 +5,13 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { EVENT } from "../../lib/event";
+import { useMessages } from "../../lib/i18n";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const ICONS: Record<string, React.ReactNode> = {
   // puerta abierta
-  Recepción: (
+  reception: (
     <>
       <path d="M5 21V4a1 1 0 0 1 1-1h9a1 1 0 0 1 1 1v17" />
       <path d="M3 21h18" />
@@ -18,7 +19,7 @@ const ICONS: Record<string, React.ReactNode> = {
     </>
   ),
   // dos anillos
-  Ceremonia: (
+  ceremony: (
     <>
       <circle cx="9" cy="14" r="5" />
       <circle cx="15" cy="14" r="5" />
@@ -26,7 +27,7 @@ const ICONS: Record<string, React.ReactNode> = {
     </>
   ),
   // copa de cóctel
-  Cóctel: (
+  cocktail: (
     <>
       <path d="M4 4h16l-8 9z" />
       <path d="M12 13v8" />
@@ -34,7 +35,7 @@ const ICONS: Record<string, React.ReactNode> = {
     </>
   ),
   // cubiertos
-  Cena: (
+  dinner: (
     <>
       <path d="M6 3v7a2 2 0 0 0 2 2v9" />
       <path d="M10 3v7a2 2 0 0 1-2 2" />
@@ -42,7 +43,7 @@ const ICONS: Record<string, React.ReactNode> = {
     </>
   ),
   // nota musical
-  Rumba: (
+  party: (
     <>
       <path d="M9 18V5l11-2v13" />
       <circle cx="6" cy="18" r="3" />
@@ -53,6 +54,7 @@ const ICONS: Record<string, React.ReactNode> = {
 
 /** Minuto a minuto: línea de tiempo vertical con entrada escalonada. */
 export default function Timeline() {
+  const m = useMessages();
   const root = useRef<HTMLElement>(null);
 
   useGSAP(
@@ -88,12 +90,12 @@ export default function Timeline() {
         data-reveal
         className="font-pinyon text-[clamp(3rem,14vw,7rem)] leading-[1.05]"
       >
-        Minuto a minuto
+        {m.timeline.title}
       </h2>
 
       <ol className="relative flex w-full max-w-sm flex-col gap-10 border-l border-black/30 pl-10 text-left">
-        {EVENT.schedule.map(({ time, label }) => (
-          <li key={label} data-reveal className="relative">
+        {EVENT.schedule.map(({ id, time }) => (
+          <li key={id} data-reveal className="relative">
             <span
               aria-hidden
               className="absolute top-0 -left-[3.25rem] flex h-10 w-10 items-center justify-center rounded-full border border-black/40 bg-white"
@@ -107,14 +109,14 @@ export default function Timeline() {
                 strokeLinejoin="round"
                 className="h-5 w-5"
               >
-                {ICONS[label]}
+                {ICONS[id]}
               </svg>
             </span>
             <p className="font-cormorant text-[clamp(1.1rem,3vw,1.5rem)] uppercase tracking-[0.3em] text-black/80">
               {time}
             </p>
             <p className="font-cormorant text-[clamp(1.5rem,4vw,2.25rem)]">
-              {label}
+              {m.timeline.items[id]}
             </p>
           </li>
         ))}

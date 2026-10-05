@@ -4,6 +4,7 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { useMessages } from "../../lib/i18n";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -42,11 +43,12 @@ function MiniEnvelope({ size }: { size: number }) {
 
 /** Sobre grande que se abre (la solapa se levanta y sube la carta). */
 function BigEnvelope() {
+  const m = useMessages();
   return (
     <svg
       viewBox="0 -25 200 175"
       role="img"
-      aria-label="Sobre"
+      aria-label={m.envelopes.envelopeAlt}
       className="w-[min(70vw,16rem)] overflow-visible"
     >
       {/* fondo */}
@@ -94,6 +96,7 @@ function BigEnvelope() {
 
 /** Regalo: lluvia de sobres. */
 export default function Envelopes() {
+  const m = useMessages();
   const root = useRef<HTMLElement>(null);
 
   useGSAP(
@@ -200,10 +203,10 @@ export default function Envelopes() {
 
       <div data-reveal className="flex flex-col items-center gap-4">
         <p className="font-cormorant text-sm uppercase tracking-[0.4em] text-white/60">
-          Regalo
+          {m.envelopes.label}
         </p>
         <h2 className="font-pinyon text-[clamp(3rem,14vw,7rem)] leading-[1.05]">
-          Lluvia de sobres
+          {m.envelopes.title}
         </h2>
       </div>
     </section>

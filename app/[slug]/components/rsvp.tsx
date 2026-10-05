@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import { useMessages } from "../../lib/i18n";
 import { saveRsvp } from "../actions";
 
 type Props = {
@@ -15,7 +16,7 @@ const BUTTON =
 const LINK =
   "px-4 py-2 font-cormorant text-xl text-white transition-colors duration-300 hover:underline hover:underline-offset-4";
 
-/** Pregunta Sí/No con dos botones (aria-pressed). */
+/** Pregunta Sí/No (traducida) con dos botones (aria-pressed). */
 function YesNo({
   label,
   value,
@@ -25,6 +26,7 @@ function YesNo({
   value: boolean;
   onChange: (v: boolean) => void;
 }) {
+  const m = useMessages();
   return (
     <div className="flex flex-col items-center gap-3">
       <p className="font-cormorant text-[clamp(1.1rem,2.2vw,1.4rem)]">
@@ -32,8 +34,8 @@ function YesNo({
       </p>
       <div className="flex gap-3">
         {[
-          { text: "Sí", v: true },
-          { text: "No", v: false },
+          { text: m.rsvp.yes, v: true },
+          { text: m.rsvp.no, v: false },
         ].map(({ text, v }) => (
           <button
             key={text}
@@ -62,6 +64,7 @@ export default function Rsvp({
   vegetarian: savedVegetarian,
   restrictions: savedRestrictions,
 }: Props) {
+  const m = useMessages();
   const [editing, setEditing] = useState(false);
   const [vegetarian, setVegetarian] = useState(savedVegetarian);
   const [hasRestrictions, setHasRestrictions] = useState(!!savedRestrictions);
@@ -74,7 +77,7 @@ export default function Rsvp({
   function submit(attending: boolean) {
     const text = restrictions.trim();
     if (attending && hasRestrictions && !text) {
-      setError("Cuéntanos cuál es tu restricción o alergia.");
+      setError(m.rsvp.restrictionsRequired);
       return;
     }
     setError(null);
@@ -86,7 +89,9 @@ export default function Rsvp({
         restrictions: attending && hasRestrictions ? text : null,
       });
       if (res.ok) setEditing(false);
-      else setError(res.error);
+      else {
+        setError(res.error === "invalid" ? m.rsvp.errorInvalid : m.rsvp.errorSave);
+      }
     });
   }
 
@@ -101,31 +106,31 @@ export default function Rsvp({
   return (
     <section className="flex flex-col items-center gap-10 bg-black px-5 py-24 text-center text-white">
       <h2 className="font-pinyon text-[clamp(3rem,14vw,7rem)] leading-[1.05]">
-        Confirma tu asistencia
+        {m.rsvp.title}
       </h2>
 
       {showForm ? (
         <div className="flex w-full max-w-md flex-col items-center gap-8">
           <YesNo
-            label="¿Eres vegetariano?"
+            label={m.rsvp.vegetarianQuestion}
             value={vegetarian}
             onChange={setVegetarian}
           />
 
           <YesNo
-            label="¿Tienes alguna restricción o alergia alimentaria?"
+            label={m.rsvp.restrictionsQuestion}
             value={hasRestrictions}
             onChange={setHasRestrictions}
           />
 
           {hasRestrictions && (
             <textarea
-              aria-label="Restricciones o alergias"
+              aria-label={m.rsvp.restrictionsLabel}
               value={restrictions}
               onChange={(e) => setRestrictions(e.target.value)}
               maxLength={500}
               rows={3}
-              placeholder="Cuéntanos cuál"
+              placeholder={m.rsvp.restrictionsPlaceholder}
               className="w-full resize-none border border-white/50 bg-transparent p-3 font-cormorant text-xl text-white outline-none placeholder:text-white/40 focus:border-white"
             />
           )}
@@ -137,7 +142,7 @@ export default function Rsvp({
           )}
 
           {isPending ? (
-            <div className="flex h-24 items-center gap-1" aria-label="Guardando">
+            <div className="flex h-24 items-center gap-1" aria-label={m.rsvp.saving}>
               <span className="h-3 w-3 animate-bounce rounded-full bg-white/70 [animation-delay:0ms]" />
               <span className="h-3 w-3 animate-bounce rounded-full bg-white/70 [animation-delay:150ms]" />
               <span className="h-3 w-3 animate-bounce rounded-full bg-white/70 [animation-delay:300ms]" />
@@ -145,14 +150,14 @@ export default function Rsvp({
           ) : (
             <div className="flex flex-col items-center gap-2">
               <button onClick={() => submit(true)} className={BUTTON}>
-                Confirmar asistencia
+                {m.rsvp.confirm}
               </button>
               <button onClick={() => submit(false)} className={LINK}>
-                No podré asistir
+                {m.rsvp.decline}
               </button>
               {confirmed !== null && (
                 <button onClick={cancel} className={`${LINK} text-white/60`}>
-                  Cancelar
+                  {m.rsvp.cancel}
                 </button>
               )}
             </div>
@@ -163,29 +168,28 @@ export default function Rsvp({
           {confirmed ? (
             <>
               <p className="text-[clamp(1.5rem,4vw,2rem)]">
-                ¡Gracias por confirmar tu asistencia! ✨
+                {m.rsvp.thanksTitle}
               </p>
               <p className="text-[clamp(1.1rem,2.2vw,1.4rem)] italic text-white/80">
-                Nos hace muy felices saber que nos acompañarás en este día tan
-                especial.
+                {m.rsvp.thanksBody}
               </p>
               <p className="text-lg text-white/60">
-                {savedVegetarian ? "Vegetariano" : "No vegetariano"}
+                {savedVegetarian ? m.rsvp.vegetarian : m.rsvp.notVegetarian}
                 {savedRestrictions && ` · ${savedRestrictions}`}
               </p>
             </>
           ) : (
             <>
               <p className="text-[clamp(1.5rem,4vw,2rem)]">
-                Entendemos que no puedas acompañarnos
+                {m.rsvp.declinedTitle}
               </p>
               <p className="text-[clamp(1.1rem,2.2vw,1.4rem)] italic text-white/80">
-                Gracias por estar presente de corazón 🤍
+                {m.rsvp.declinedBody}
               </p>
             </>
           )}
           <button onClick={() => setEditing(true)} className={LINK}>
-            Cambiar mi respuesta
+            {m.rsvp.change}
           </button>
         </div>
       )}
