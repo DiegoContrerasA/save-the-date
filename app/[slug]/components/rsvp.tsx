@@ -1,12 +1,16 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import { EVENT } from "../../lib/event";
 import { useMessages } from "../../lib/i18n";
 import { saveRsvp } from "../actions";
 
 type Props = {
   slug: string;
+  name: string;
   confirmed: boolean | null;
+  // Pasó la fecha límite y no ha confirmado: se le ofrece WhatsApp
+  closed: boolean;
   vegetarian: boolean;
   restrictions: string | null;
 };
@@ -56,11 +60,14 @@ function YesNo({
 
 /**
  * Formulario de confirmación. Sin responder (o editando) muestra el formulario;
- * ya respondido, lo oculta y deja un botón para cambiar la respuesta.
+ * ya respondido, lo oculta y deja un botón para cambiar la respuesta. Pasada
+ * la fecha límite, quien no confirmó ve un enlace a WhatsApp en su lugar.
  */
 export default function Rsvp({
   slug,
+  name,
   confirmed,
+  closed,
   vegetarian: savedVegetarian,
   restrictions: savedRestrictions,
 }: Props) {
@@ -72,7 +79,10 @@ export default function Rsvp({
   const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
 
-  const showForm = confirmed === null || editing;
+  const showForm = !closed && (confirmed === null || editing);
+  const whatsappUrl = `https://wa.me/${EVENT.whatsapp}?text=${encodeURIComponent(
+    m.rsvp.whatsappMessage.replace("{name}", name),
+  )}`;
 
   function submit(attending: boolean) {
     const text = restrictions.trim();
@@ -90,7 +100,13 @@ export default function Rsvp({
       });
       if (res.ok) setEditing(false);
       else {
-        setError(res.error === "invalid" ? m.rsvp.errorInvalid : m.rsvp.errorSave);
+        setError(
+          res.error === "invalid"
+            ? m.rsvp.errorInvalid
+            : res.error === "closed"
+              ? m.rsvp.errorClosed
+              : m.rsvp.errorSave,
+        );
       }
     });
   }
@@ -162,6 +178,21 @@ export default function Rsvp({
               )}
             </div>
           )}
+        </div>
+      ) : closed ? (
+        <div className="flex max-w-md flex-col items-center gap-6 font-cormorant">
+          <p className="text-[clamp(1.5rem,4vw,2rem)]">{m.rsvp.closedTitle}</p>
+          <p className="text-[clamp(1.1rem,2.2vw,1.4rem)] italic text-white/80">
+            {m.rsvp.closedBody}
+          </p>
+          <a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={BUTTON}
+          >
+            {m.rsvp.whatsapp}
+          </a>
         </div>
       ) : (
         <div className="flex max-w-md flex-col items-center gap-6 font-cormorant">

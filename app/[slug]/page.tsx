@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { cache } from "react";
+import { isRsvpClosed } from "../lib/event";
 import { getGuestBySlug } from "../lib/guests";
 import { I18nProvider } from "../lib/i18n";
 import { getMessages } from "../lib/messages";
@@ -59,7 +60,9 @@ export default async function InvitationPage({
         <NoKids />
         <Rsvp
           slug={guest.slug}
+          name={guest.name}
           confirmed={guest.confirmed}
+          closed={isRsvpClosed(guest.confirmed)}
           vegetarian={guest.vegetarian}
           restrictions={guest.restrictions}
         />

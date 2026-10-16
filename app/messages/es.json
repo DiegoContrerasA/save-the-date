@@ -87,6 +87,11 @@
     "declinedBody": "Gracias por estar presente de corazón 🤍",
     "change": "Cambiar mi respuesta",
     "errorInvalid": "Revisa los datos e inténtalo de nuevo.",
-    "errorSave": "No pudimos guardar tu respuesta."
+    "errorSave": "No pudimos guardar tu respuesta.",
+    "errorClosed": "La confirmación ya cerró.",
+    "closedTitle": "La confirmación cerró el 15 de octubre",
+    "closedBody": "Si tus planes cambiaron, escríbenos por WhatsApp y lo hablamos.",
+    "whatsapp": "Escribir por WhatsApp",
+    "whatsappMessage": "Hola Diego, soy {name}. ¿Todavía puedo confirmar mi asistencia a la boda?"
   }
 }

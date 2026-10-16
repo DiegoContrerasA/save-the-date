@@ -22,4 +22,16 @@ export const EVENT = {
     { id: "dinner", time: "7:30 pm" },
     { id: "party", time: "9:00 pm" },
   ],
+  // Fin de la confirmación: último segundo del 15 de octubre, hora de Bogotá
+  rsvpDeadline: "2026-10-15T23:59:59-05:00",
+  // WhatsApp para quien quiera confirmar después de la fecha (wa.me, sin +)
+  whatsapp: "573122861377",
 } as const;
+
+/**
+ * Pasada la fecha límite solo pueden cambiar su respuesta quienes ya
+ * confirmaron; el resto (no van o sin responder) escribe por WhatsApp.
+ */
+export function isRsvpClosed(confirmed: boolean | null): boolean {
+  return confirmed !== true && Date.now() > Date.parse(EVENT.rsvpDeadline);
+}

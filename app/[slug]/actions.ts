@@ -3,6 +3,8 @@
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { getSupabase } from "../lib/db";
+import { isRsvpClosed } from "../lib/event";
+import { getGuestBySlug } from "../lib/guests";
 
 const schema = z.object({
   slug: z.string().min(1).max(200),
@@ -13,7 +15,7 @@ const schema = z.object({
 
 export type RsvpResult =
   | { ok: true }
-  | { ok: false; error: "invalid" | "save" };
+  | { ok: false; error: "invalid" | "save" | "closed" };
 
 export async function saveRsvp(input: unknown): Promise<RsvpResult> {
   const parsed = schema.safeParse(input);
@@ -25,6 +27,11 @@ export async function saveRsvp(input: unknown): Promise<RsvpResult> {
   // Quien no asiste no necesita dejar preferencias de comida
   const vegetarian = confirmed && parsed.data.vegetarian;
   const restrictions = confirmed ? parsed.data.restrictions || null : null;
+
+  // Pasada la fecha, solo quien ya confirmó puede cambiar su respuesta
+  const guest = await getGuestBySlug(slug);
+  if (!guest) return { ok: false, error: "invalid" };
+  if (isRsvpClosed(guest.confirmed)) return { ok: false, error: "closed" };
 
   const db = getSupabase();
   if (!db) return { ok: false, error: "save" };

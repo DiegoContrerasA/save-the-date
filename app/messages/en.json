@@ -87,6 +87,11 @@
     "declinedBody": "Thank you for being with us in spirit 🤍",
     "change": "Change my answer",
     "errorInvalid": "Please check your answers and try again.",
-    "errorSave": "We couldn't save your answer."
+    "errorSave": "We couldn't save your answer.",
+    "errorClosed": "RSVP is closed.",
+    "closedTitle": "RSVP closed on October 15",
+    "closedBody": "If your plans changed, message us on WhatsApp and we'll sort it out.",
+    "whatsapp": "Message us on WhatsApp",
+    "whatsappMessage": "Hi Diego, it's {name}. Can I still RSVP for the wedding?"
   }
 }
