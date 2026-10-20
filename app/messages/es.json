@@ -89,7 +89,7 @@
     "errorInvalid": "Revisa los datos e inténtalo de nuevo.",
     "errorSave": "No pudimos guardar tu respuesta.",
     "errorClosed": "La confirmación ya cerró.",
-    "closedTitle": "La confirmación cerró el 15 de octubre",
+    "closedTitle": "La confirmación cerró el {date}",
     "closedBody": "Si tus planes cambiaron, escríbenos por WhatsApp y lo hablamos.",
     "whatsapp": "Escribir por WhatsApp",
     "whatsappMessage": "Hola Andre 🤍 Soy {name}. ¡Ya pudimos resolver nuestros planes y nos encantaría acompañarlos en su boda! ¿Todavía estamos a tiempo de confirmar?"

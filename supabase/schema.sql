@@ -12,8 +12,12 @@ create table if not exists public.guests (
   restrictions  text check (char_length(restrictions) <= 500), -- alergias / restricciones
   has_role      boolean not null default false,                -- rol especial en la boda (mensaje extra)
   language      text not null default 'es'
-                  check (language in ('en', 'es'))             -- idioma de la invitación
+                  check (language in ('en', 'es')),            -- idioma de la invitación
+  rsvp_deadline timestamptz                                    -- null = fecha general (app/lib/event.ts)
 );
+
+-- Si la tabla ya existía:
+alter table public.guests add column if not exists rsvp_deadline timestamptz;
 
 -- Seguridad: RLS activado SIN policies => la publishable key no puede leer ni
 -- escribir la tabla. La app solo accede por las funciones de rpc.sql.

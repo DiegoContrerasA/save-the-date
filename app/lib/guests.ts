@@ -12,6 +12,8 @@ export type Guest = {
   hasRole: boolean;
   // Idioma de la invitación
   language: Lang;
+  // Fecha límite propia (ISO); null = la general de EVENT.rsvpDeadline
+  rsvpDeadline: string | null;
 };
 
 export async function getGuestBySlug(slug: string): Promise<Guest | null> {
@@ -47,5 +49,6 @@ export async function getGuestBySlug(slug: string): Promise<Guest | null> {
     restrictions: data.restrictions,
     hasRole: data.has_role,
     language: data.language === "en" ? "en" : "es",
+    rsvpDeadline: data.rsvp_deadline ?? null,
   };
 }

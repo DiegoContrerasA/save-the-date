@@ -89,7 +89,7 @@
     "errorInvalid": "Please check your answers and try again.",
     "errorSave": "We couldn't save your answer.",
     "errorClosed": "RSVP is closed.",
-    "closedTitle": "RSVP closed on October 15",
+    "closedTitle": "RSVP closed on {date}",
     "closedBody": "If your plans changed, message us on WhatsApp and we'll sort it out.",
     "whatsapp": "Message us on WhatsApp",
     "whatsappMessage": "Hi Andre 🤍 It's {name}. We were finally able to sort out our plans and we'd love to celebrate with you at your wedding! Is there still time to confirm?"

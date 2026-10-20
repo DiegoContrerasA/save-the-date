@@ -11,6 +11,8 @@ type Props = {
   confirmed: boolean | null;
   // Pasó la fecha límite y no ha confirmado: se le ofrece WhatsApp
   closed: boolean;
+  // Fecha límite ya formateada ("15 de octubre")
+  deadline: string;
   vegetarian: boolean;
   restrictions: string | null;
 };
@@ -68,6 +70,7 @@ export default function Rsvp({
   name,
   confirmed,
   closed,
+  deadline,
   vegetarian: savedVegetarian,
   restrictions: savedRestrictions,
 }: Props) {
@@ -181,7 +184,7 @@ export default function Rsvp({
         </div>
       ) : closed ? (
         <div className="flex max-w-md flex-col items-center gap-6 font-cormorant">
-          <p className="text-[clamp(1.5rem,4vw,2rem)]">{m.rsvp.closedTitle}</p>
+          <p className="text-[clamp(1.5rem,4vw,2rem)]">{m.rsvp.closedTitle.replace("{date}", deadline)}</p>
           <p className="text-[clamp(1.1rem,2.2vw,1.4rem)] italic text-white/80">
             {m.rsvp.closedBody}
           </p>

@@ -15,14 +15,15 @@ returns table (
   vegetarian   boolean,
   restrictions text,
   has_role     boolean,
-  language     text
+  language     text,
+  rsvp_deadline timestamptz
 )
 language sql
 stable
 security definer
 set search_path = ''
 as $$
-  select g.slug, g.name, g.confirmed, g.vegetarian, g.restrictions, g.has_role, g.language
+  select g.slug, g.name, g.confirmed, g.vegetarian, g.restrictions, g.has_role, g.language, g.rsvp_deadline
   from public.guests g
   where g.slug = p_slug;
 $$;

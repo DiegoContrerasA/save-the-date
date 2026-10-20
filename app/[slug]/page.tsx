@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { cache } from "react";
-import { isRsvpClosed } from "../lib/event";
+import { formatDeadline, isRsvpClosed, rsvpDeadlineOf } from "../lib/event";
 import { getGuestBySlug } from "../lib/guests";
 import { I18nProvider } from "../lib/i18n";
 import { getMessages } from "../lib/messages";
@@ -62,7 +62,8 @@ export default async function InvitationPage({
           slug={guest.slug}
           name={guest.name}
           confirmed={guest.confirmed}
-          closed={isRsvpClosed(guest.confirmed)}
+          closed={isRsvpClosed(guest)}
+          deadline={formatDeadline(rsvpDeadlineOf(guest), guest.language)}
           vegetarian={guest.vegetarian}
           restrictions={guest.restrictions}
         />

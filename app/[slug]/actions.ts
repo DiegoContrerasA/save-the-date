@@ -31,7 +31,7 @@ export async function saveRsvp(input: unknown): Promise<RsvpResult> {
   // Pasada la fecha, solo quien ya confirmó puede cambiar su respuesta
   const guest = await getGuestBySlug(slug);
   if (!guest) return { ok: false, error: "invalid" };
-  if (isRsvpClosed(guest.confirmed)) return { ok: false, error: "closed" };
+  if (isRsvpClosed(guest)) return { ok: false, error: "closed" };
 
   const db = getSupabase();
   if (!db) return { ok: false, error: "save" };
